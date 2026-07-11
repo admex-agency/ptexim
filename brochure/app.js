@@ -10,6 +10,9 @@
   const scrim = $('scrim');
   const zoomValue = $('fitBtn');
   let zoom = 1;
+  let panX = 0;
+  let panY = 0;
+  let dragState = null;
 
   // Preserve the original portrait page ratio (2550 × 3578) and calculate
   // the largest full-page size that fits inside the current viewport.
@@ -71,13 +74,60 @@
   $('prevBtn').onclick = $('dockPrevBtn').onclick = prev;
   $('nextBtn').onclick = $('dockNextBtn').onclick = next;
 
-  function setZoom(value) {
-    zoom = Math.max(1, Math.min(2.25, value));
-    zoomStage.style.transform = `scale(${zoom})`;
-    zoomStage.classList.toggle('is-zoomed', zoom > 1.01);
-    zoomValue.textContent = `${Math.round(zoom * 100)}%`;
-    viewport.classList.toggle('is-zoomed', zoom > 1.01);
+  function applyTransform() {
+    zoomStage.style.transform = `translate3d(${panX}px, ${panY}px, 0) scale(${zoom})`;
   }
+
+  function setZoom(value) {
+    const previousZoom = zoom;
+    zoom = Math.max(1, Math.min(2.25, value));
+    const isZoomed = zoom > 1.01;
+
+    // Reset the reading position when returning to the fitted page.
+    if (!isZoomed) {
+      panX = 0;
+      panY = 0;
+    } else if (previousZoom <= 1.01) {
+      panX = 0;
+      panY = 0;
+    }
+
+    applyTransform();
+    zoomStage.classList.toggle('is-zoomed', isZoomed);
+    zoomValue.textContent = `${Math.round(zoom * 100)}%`;
+    viewport.classList.toggle('is-zoomed', isZoomed);
+    viewport.setAttribute('aria-label', isZoomed
+      ? 'Chế độ phóng to: kéo trang để xem nội dung; dùng nút điều hướng để chuyển trang'
+      : 'Chế độ xem trang: vuốt hoặc chạm cạnh trang để chuyển trang');
+  }
+
+  // When zoomed, dragging must pan the page instead of triggering PageFlip.
+  // Pointer events on the flipbook are disabled by CSS in this mode, so the
+  // viewport becomes the sole gesture surface.
+  viewport.addEventListener('pointerdown', e => {
+    if (zoom <= 1.01 || e.button > 0) return;
+    dragState = { id: e.pointerId, x: e.clientX, y: e.clientY, panX, panY };
+    viewport.setPointerCapture?.(e.pointerId);
+    viewport.classList.add('is-panning');
+    e.preventDefault();
+  });
+
+  viewport.addEventListener('pointermove', e => {
+    if (!dragState || dragState.id !== e.pointerId) return;
+    panX = dragState.panX + (e.clientX - dragState.x);
+    panY = dragState.panY + (e.clientY - dragState.y);
+    applyTransform();
+    e.preventDefault();
+  });
+
+  function endPan(e) {
+    if (!dragState || (e && dragState.id !== e.pointerId)) return;
+    dragState = null;
+    viewport.classList.remove('is-panning');
+  }
+  viewport.addEventListener('pointerup', endPan);
+  viewport.addEventListener('pointercancel', endPan);
+  viewport.addEventListener('lostpointercapture', endPan);
   $('zoomIn').onclick = () => setZoom(zoom + 0.2);
   $('zoomOut').onclick = () => setZoom(zoom - 0.2);
   $('fitBtn').onclick = () => setZoom(1);
