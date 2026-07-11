@@ -1,1 +1,81 @@
 
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0d0f12" />
+  <title>PTEXIM Digital Brochure</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-title">PTEXIM DIGITAL BROCHURE</span>
+      </div>
+      <button id="thumbBtn" class="top-action" type="button" aria-label="Mở danh sách trang">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h5v5H4V5Zm0 9h5v5H4v-5Zm9-9h7v5h-7V5Zm0 9h7v5h-7v-5Z"/></svg>
+        <span>Trang</span>
+      </button>
+    </header>
+
+    <main class="viewer-shell">
+      <div id="viewport" class="viewport">
+        <div id="zoomStage" class="zoom-stage">
+          <div id="book" class="book" aria-label="Brochure PTEXIM">
+            <div class="book-page logo-page" data-density="hard"><img src="assets/brand/ptexim-logo.svg" alt="PTEXIM" /></div>
+            <div class="book-page"><img src="assets/pages/P1.jpg" alt="Trang 1" /></div>
+            <div class="book-page"><img src="assets/pages/P2.jpg" alt="Trang 2" /></div>
+            <div class="book-page"><img src="assets/pages/P3.jpg" alt="Trang 3" /></div>
+            <div class="book-page"><img src="assets/pages/P4.jpg" alt="Trang 4" /></div>
+            <div class="book-page"><img src="assets/pages/P5.jpg" alt="Trang 5" /></div>
+            <div class="book-page"><img src="assets/pages/P6.jpg" alt="Trang 6" /></div>
+            <div class="book-page"><img src="assets/pages/P7.jpg" alt="Trang 7" /></div>
+            <div class="book-page"><img src="assets/pages/P8.jpg" alt="Trang 8" /></div>
+            <div class="book-page"><img src="assets/pages/P9.jpg" alt="Trang 9" /></div>
+            <div class="book-page"><img src="assets/pages/P10.jpg" alt="Trang 10" /></div>
+            <div class="book-page"><img src="assets/pages/P11.jpg" alt="Trang 11" /></div>
+            <div class="book-page"><img src="assets/pages/P12.jpg" alt="Trang 12" /></div>
+            <div class="book-page"><img src="assets/pages/P13.jpg" alt="Trang 13" /></div>
+            <div class="book-page"><img src="assets/pages/P14.jpg" alt="Trang 14" /></div>
+            <div class="book-page"><img src="assets/pages/P15.jpg" alt="Trang 15" /></div>
+            <div class="book-page"><img src="assets/pages/P16.jpg" alt="Trang 16" /></div>
+            <div class="book-page"><img src="assets/pages/P17.jpg" alt="Trang 17" /></div>
+            <div class="book-page"><img src="assets/pages/P18.jpg" alt="Trang 18" /></div>
+            <div class="book-page"><img src="assets/pages/P19.jpg" alt="Trang 19" /></div>
+            <div class="book-page"><img src="assets/pages/P20.jpg" alt="Trang 20" /></div>
+            <div class="book-page logo-page" data-density="hard"><img src="assets/brand/ptexim-logo.svg" alt="PTEXIM" /></div>
+          </div>
+        </div>
+      </div>
+
+      <button id="prevBtn" class="edge-nav edge-prev" type="button" aria-label="Trang trước"><svg viewBox="0 0 24 24"><path d="m15.5 4-8 8 8 8 1.5-1.5-6.5-6.5L17 5.5 15.5 4Z"/></svg></button>
+      <button id="nextBtn" class="edge-nav edge-next" type="button" aria-label="Trang sau"><svg viewBox="0 0 24 24"><path d="m8.5 4 8 8-8 8L7 18.5l6.5-6.5L7 5.5 8.5 4Z"/></svg></button>
+
+      <div class="control-dock" role="toolbar" aria-label="Công cụ xem brochure">
+        <button id="dockThumbBtn" class="dock-btn" type="button" aria-label="Danh sách trang" title="Danh sách trang"><svg viewBox="0 0 24 24"><path d="M4 5h5v5H4V5Zm0 9h5v5H4v-5Zm9-9h7v5h-7V5Zm0 9h7v5h-7v-5Z"/></svg></button>
+        <span class="dock-divider"></span>
+        <button id="dockPrevBtn" class="dock-btn" type="button" aria-label="Trang trước"><svg viewBox="0 0 24 24"><path d="m15.5 4-8 8 8 8 1.5-1.5-6.5-6.5L17 5.5 15.5 4Z"/></svg></button>
+        <div id="pageLabel" class="page-label">Trang 1 / 20</div>
+        <button id="dockNextBtn" class="dock-btn" type="button" aria-label="Trang sau"><svg viewBox="0 0 24 24"><path d="m8.5 4 8 8-8 8L7 18.5l6.5-6.5L7 5.5 8.5 4Z"/></svg></button>
+        <span class="dock-divider"></span>
+        <button id="zoomOut" class="dock-btn" type="button" aria-label="Thu nhỏ" title="Thu nhỏ"><svg viewBox="0 0 24 24"><path d="M5 11h10v2H5zM16.5 15l4.5 4.5-1.5 1.5-4.5-4.5z"/><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+        <button id="fitBtn" class="zoom-value" type="button" aria-label="Vừa màn hình">100%</button>
+        <button id="zoomIn" class="dock-btn" type="button" aria-label="Phóng to" title="Phóng to"><svg viewBox="0 0 24 24"><path d="M9 5h2v4h4v2h-4v4H9v-4H5V9h4zM16.5 15l4.5 4.5-1.5 1.5-4.5-4.5z"/><circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+        <button id="fullscreenBtn" class="dock-btn" type="button" aria-label="Toàn màn hình" title="Toàn màn hình"><svg viewBox="0 0 24 24"><path d="M4 4h6v2H6v4H4V4Zm10 0h6v6h-2V6h-4V4ZM4 14h2v4h4v2H4v-6Zm14 0h2v6h-6v-2h4v-4Z"/></svg></button>
+      </div>
+    </main>
+
+    <aside id="thumbPanel" class="thumb-panel" aria-hidden="true">
+      <div class="thumb-head"><div><strong>Danh sách trang</strong><span>20 trang nội dung</span></div><button id="closeThumb" class="close-btn" type="button" aria-label="Đóng"><svg viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2"/></svg></button></div>
+      <div id="thumbGrid" class="thumb-grid"></div>
+    </aside>
+    <div id="scrim" class="scrim"></div>
+  </div>
+
+  <script src="page-flip.browser.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
